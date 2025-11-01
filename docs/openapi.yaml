@@ -27,7 +27,7 @@ info:
 
     📚 Developer Experience:
     - Fully documented endpoints with request and response schemas.
-    - Organized by resource type: /customers, /pets, /services, /bookings, /users, /auth.
+    - Organized by resource type: /customers, /pets, /services, /bookings, /employees, /auth.
     - Uses standard HTTP status codes for clear error handling and success feedback.
     - Compatible with Swagger UI, Postman, and other OpenAPI tools.
 
@@ -44,7 +44,7 @@ servers:
 paths:
   /auth/signup:
     post:
-      summary: Register a new user
+      summary: Register a new employee
       tags: [Authentication]
       requestBody:
         required: true
@@ -58,14 +58,14 @@ paths:
                 email: { type: string }
                 password: { type: string }
       responses:
-        "201": { description: User created successfully }
-        "402": { description: User already exists }
+        "201": { description: Employee created successfully }
+        "402": { description: Employee already exists }
         "404": { description: Token not found }
         "500": { description: Internal server error }
 
   /auth/login:
     post:
-      summary: Authenticate user and start session
+      summary: Authenticate employee and start session
       tags: [Authentication]
       requestBody:
         required: true
