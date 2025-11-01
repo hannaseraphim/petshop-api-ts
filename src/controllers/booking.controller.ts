@@ -1,5 +1,6 @@
 import type { Response, Request } from "express";
 import db from "../database/database";
+import type { RowDataPacket } from "mysql2";
 
 // Create a booking
 export const createBooking = async (req: Request, res: Response) => {
@@ -18,7 +19,7 @@ export const createBooking = async (req: Request, res: Response) => {
           return res
             .status(500)
             .json({ Message: "INTERNAL_ERROR", Error: err });
-        if (row.length > 0)
+        if (Array.isArray(row) && row.length > 0)
           return res.status(409).json({ Message: "BOOKING_ALREADY_CREATED" });
 
         db.query(
@@ -54,7 +55,7 @@ export const updateBooking = async (req: Request, res: Response) => {
           return res
             .status(500)
             .json({ Message: "INTERNAL_ERROR", Error: err });
-        if (row.length === 0)
+        if (!Array.isArray(row) || row.length === 0)
           return res.status(404).json({ Message: "BOOKING_NOT_FOUND" });
 
         const validFields = ["pet_owner", "date", "observations", "date"];
@@ -116,7 +117,7 @@ export const deleteBooking = async (req: Request, res: Response) => {
           return res
             .status(500)
             .json({ Message: "INTERNAL_ERROR", Error: err });
-        if (row.length === 0)
+        if (!Array.isArray(row) || row.length === 0)
           return res.status(404).json({ Message: "PET_NOT_FOUND", Error: err });
 
         db.query(
@@ -148,12 +149,14 @@ export const detailBooking = async (req: Request, res: Response) => {
           return res
             .status(500)
             .json({ Message: "INTERNAL_ERROR", Error: err });
-        if (row.length === 0)
+        if (!Array.isArray(row) || row.length === 0)
           return res.status(404).json({ Message: "BOOKING_NOT_FOUND" });
+
+        const booking = row[0] as RowDataPacket;
 
         db.query(
           "SELECT * FROM services WHERE services.id = ?",
-          [row[0].id],
+          [booking.id],
           (err, result) => {
             if (err)
               return res

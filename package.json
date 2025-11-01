@@ -24,6 +24,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
+    "mysql2": "^3.15.3",
     "swagger-ui-express": "^5.0.1",
     "yamljs": "^0.3.0"
   },

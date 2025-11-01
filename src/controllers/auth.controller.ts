@@ -3,6 +3,7 @@ import db from "../database/database";
 import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import type { RowDataPacket } from "mysql2";
 
 dotenv.config();
 const saltRounds = 10;
@@ -10,14 +11,17 @@ const jwtToken = process.env.JWT_SIGN_KEY;
 
 export const signUp = (req: Request, res: Response) => {
   const { name, email, password } = req.body;
+  if (!name || !email || !password)
+    return res.status(409).json({ Message: "EMPTY_REQUIRED_FIELDS" });
+
   db.query(
-    "SELECT * FROM users WHERE email = ?",
+    "SELECT * FROM employees WHERE email = ?",
     [email],
     async (err, results) => {
       if (err)
         return res.status(500).json({ Message: "INTERNAL_ERROR", Error: err });
 
-      if (results.length > 0) {
+      if (Array.isArray(results) && results.length > 0) {
         return res.status(402).json({ Message: "USER_ALREADY_EXISTS" });
       } else {
         try {
@@ -33,9 +37,11 @@ export const signUp = (req: Request, res: Response) => {
             return res.status(404).json({ Message: "TOKEN_NOT_FOUND" });
           }
 
+          const currentDate = new Date();
+
           db.query(
-            "INSERT INTO users(name, email, password, type) VALUES (?, ?, ?, ?)",
-            [name, email, hashedPassword, "guest"],
+            "INSERT INTO employees(name, email, password, date) VALUES (?, ?, ?, ?)",
+            [name, email, hashedPassword, currentDate],
             (err, result) => {
               if (err)
                 return res.status(500).json({
@@ -81,9 +87,9 @@ export const login = (req: Request, res: Response) => {
     "SELECT * FROM users WHERE email = ?",
     [email],
     async (err, result) => {
-      if (err || result.length === 0)
+      if (err || !Array.isArray(result) || result.length === 0)
         return res.status(404).json({ Message: "USER_NOT_FOUND" });
-      const user = result[0];
+      const user = result[0] as RowDataPacket;
       const correctPassword = await bcrypt.compare(password, user.password);
 
       if (correctPassword) {
