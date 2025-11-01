@@ -58,10 +58,10 @@ paths:
                 email: { type: string }
                 password: { type: string }
       responses:
-        '201': { description: User created successfully }
-        '402': { description: User already exists }
-        '404': { description: Token not found }
-        '500': { description: Internal server error }
+        "201": { description: User created successfully }
+        "402": { description: User already exists }
+        "404": { description: Token not found }
+        "500": { description: Internal server error }
 
   /auth/login:
     post:
@@ -78,16 +78,16 @@ paths:
                 email: { type: string }
                 password: { type: string }
       responses:
-        '200': { description: Login successful }
-        '404': { description: Invalid password or user not found }
-        '500': { description: Internal server error }
+        "200": { description: Login successful }
+        "404": { description: Invalid password or user not found }
+        "500": { description: Internal server error }
 
-  /users:
+  /employees:
     get:
-      summary: List all users
-      tags: [Users]
+      summary: List all employees
+      tags: [Employees]
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
@@ -95,56 +95,52 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties: 
-                    id: 
+                  properties:
+                    id:
                       type: integer
                     name:
                       type: string
-                    email: 
+                    email:
                       type: string
                     password:
                       type: string
-                    type:
+                    date:
                       type: string
-                    created_on:
-                      type: string
-        '500': { description: Internal server error }
+        "500": { description: Internal server error }
 
-  /users/{id}:
+  /employees/{id}:
     get:
-      summary: Get details of a specific user
-      tags: [Users]
+      summary: Get details of a specific employee
+      tags: [Employees]
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema: { type: integer }
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  id: 
+                properties:
+                  id:
                     type: integer
                   name:
                     type: string
-                  email: 
+                  email:
                     type: string
                   password:
                     type: string
-                  type:
+                  date:
                     type: string
-                  created_on:
-                    type: string
-        '404': { description: User not found }
-        '500': { description: Internal server error }
+        "404": { description: Employee not found }
+        "500": { description: Internal server error }
 
     put:
-      summary: Update a user's information
-      tags: [Users]
+      summary: Update a employee's information
+      tags: [Employees]
       parameters:
         - name: id
           in: path
@@ -158,28 +154,28 @@ paths:
               type: object
               additionalProperties: true
       responses:
-          '201': { description: User updated }
-          '404': { description: User not found }
-          '500': { description: Internal server error }
+        "201": { description: Employee updated }
+        "404": { description: Employee not found }
+        "500": { description: Internal server error }
 
     delete:
-      summary: Delete a user
-      tags: [Users]
+      summary: Delete a Employee
+      tags: [Employees]
       parameters:
         - name: id
           in: path
           required: true
           schema: { type: integer }
       responses:
-          '200': { description: User deleted }
-          '404': { description: User not found }
-          '500': { description: Internal server error }
+        "200": { description: Employee deleted }
+        "404": { description: Employee not found }
+        "500": { description: Internal server error }
   /pets:
     get:
       summary: List all pets
       tags: [Pets]
       responses:
-        '200':
+        "200":
           description: Success
           content:
             application/json:
@@ -198,8 +194,8 @@ paths:
                       type: string
                     customer_id:
                       type: integer
-        '500':
-          description: Internal server 
+        "500":
+          description: Internal server
 
     post:
       summary: Create a new pet
@@ -217,10 +213,10 @@ paths:
                 type: { type: string }
                 customer_id: { type: integer }
       responses:
-        '200': { description: Pet created}
-        '404': { description: Customer not found }
-        '409': { description: Pet already exists }
-        '500': { description: Internal server error }
+        "200": { description: Pet created }
+        "404": { description: Customer not found }
+        "409": { description: Pet already exists }
+        "500": { description: Internal server error }
 
   paths:
   /pets/{id}:
@@ -233,18 +229,18 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  id: 
+                properties:
+                  id:
                     type: integer
                   name:
                     type: string
-                  email: 
+                  email:
                     type: string
                   password:
                     type: string
@@ -252,8 +248,8 @@ paths:
                     type: string
                   created_on:
                     type: string
-        '404': { description: Pet not found }
-        '500': { description: Internal server error }
+        "404": { description: Pet not found }
+        "500": { description: Internal server error }
 
     put:
       summary: Update a pet's information
@@ -271,9 +267,9 @@ paths:
               type: object
               additionalProperties: true
       responses:
-        '201': { description: Pet updated }
-        '404': { description: Pet not found }
-        '500': { description: Internal server error }
+        "201": { description: Pet updated }
+        "404": { description: Pet not found }
+        "500": { description: Internal server error }
 
     delete:
       summary: Delete a pet
@@ -284,16 +280,16 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': { description: Success }
-        '404': { description: Pet not found }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "404": { description: Pet not found }
+        "500": { description: Internal server error }
 
   /services:
     get:
       summary: List all services
       tags: [Services]
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
@@ -301,16 +297,16 @@ paths:
                 type: array
                 items:
                   type: object
-                  properties: 
-                    id: 
+                  properties:
+                    id:
                       type: integer
                     name:
                       type: string
-                    description: 
+                    description:
                       type: string
                     price:
                       type: number
-        '500': { description: Internal server error }
+        "500": { description: Internal server error }
 
     post:
       summary: Create a new service
@@ -327,9 +323,9 @@ paths:
                 description: { type: string }
                 price: { type: number }
       responses:
-        '200': { description: Success }
-        '409': { description: Service already exists }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "409": { description: Service already exists }
+        "500": { description: Internal server error }
 
   /services/{id}:
     get:
@@ -341,23 +337,23 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  id: 
+                properties:
+                  id:
                     type: integer
                   name:
                     type: string
-                  description: 
+                  description:
                     type: string
                   type:
                     type: number
-        '404': { description: Service not found }
-        '500': { description: Internal server error }
+        "404": { description: Service not found }
+        "500": { description: Internal server error }
 
     put:
       summary: Update a service
@@ -375,9 +371,9 @@ paths:
               type: object
               additionalProperties: true
       responses:
-        '201': { description: Service updated }
-        '404': { description: Service not found }
-        '500': { description: Internal server error }
+        "201": { description: Service updated }
+        "404": { description: Service not found }
+        "500": { description: Internal server error }
 
     delete:
       summary: Delete a service
@@ -388,17 +384,17 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': { description: Success }
-        '404': { description: Service not found }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "404": { description: Service not found }
+        "500": { description: Internal server error }
 
   /customers:
     get:
       summary: List all customers
       tags: [Customers]
       responses:
-        '200': { description: Success }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "500": { description: Internal server error }
 
     post:
       summary: Create a new customer
@@ -416,9 +412,9 @@ paths:
                 address: { type: string }
                 email: { type: string }
       responses:
-        '200': { description: Success }
-        '409': { description: Customer already exists }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "409": { description: Customer already exists }
+        "500": { description: Internal server error }
 
   /customers/{id}:
     get:
@@ -430,25 +426,25 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  id: 
+                properties:
+                  id:
                     type: integer
                   name:
                     type: string
-                  phone: 
+                  phone:
                     type: string
-                  email: 
+                  email:
                     type: string
                   address:
                     type: string
-        '404': { description: Customer not found }
-        '500': { description: Internal server error }
+        "404": { description: Customer not found }
+        "500": { description: Internal server error }
 
     put:
       summary: Update a customer's information
@@ -466,9 +462,9 @@ paths:
               type: object
               additionalProperties: true
       responses:
-        '201': { description: Customer Updated }
-        '404': { description: Customer not found }
-        '500': { description: Internal server error }
+        "201": { description: Customer Updated }
+        "404": { description: Customer not found }
+        "500": { description: Internal server error }
 
     delete:
       summary: Delete a customer
@@ -490,11 +486,11 @@ paths:
                   type: boolean
                   description: If true, also deletes all pets associated with the customer
       responses:
-        '200':
+        "200":
           description: Success
-        '404':
+        "404":
           description: Customer not found
-        '500':
+        "500":
           description: Internal server error
 
   /bookings:
@@ -502,8 +498,8 @@ paths:
       summary: List all bookings
       tags: [Bookings]
       responses:
-        '200': { description: Success }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "500": { description: Internal server error }
 
     post:
       summary: Create a new booking
@@ -521,9 +517,9 @@ paths:
                 pet_owner: { type: string }
                 observations: { type: string }
       responses:
-        '200': { description: Success }
-        '409': { description: Booking already exists }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "409": { description: Booking already exists }
+        "500": { description: Internal server error }
 
   /bookings/{id}:
     get:
@@ -535,20 +531,20 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': 
+        "200":
           description: Success
           content:
             application/json:
               schema:
                 type: object
-                properties: 
-                  id: 
+                properties:
+                  id:
                     type: integer
                   pet_id:
                     type: integer
-                  service_id: 
+                  service_id:
                     type: integer
-                  pet_owner: 
+                  pet_owner:
                     type: integer
                   date:
                     type: string
@@ -556,8 +552,8 @@ paths:
                     type: string
                   status:
                     type: string
-        '404': { description: Booking not found }
-        '500': { description: Internal server error }
+        "404": { description: Booking not found }
+        "500": { description: Internal server error }
 
     put:
       summary: Update a booking
@@ -575,9 +571,9 @@ paths:
               type: object
               additionalProperties: true
       responses:
-        '201': { description: Booking updated }
-        '404': { description: Booking not found }
-        '500': { description: Internal server error }
+        "201": { description: Booking updated }
+        "404": { description: Booking not found }
+        "500": { description: Internal server error }
 
     delete:
       summary: Delete a booking
@@ -588,6 +584,6 @@ paths:
           required: true
           schema: { type: integer }
       responses:
-        '200': { description: Success }
-        '404': { description: Booking not found }
-        '500': { description: Internal server error }
+        "200": { description: Success }
+        "404": { description: Booking not found }
+        "500": { description: Internal server error }

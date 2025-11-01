@@ -32,10 +32,8 @@ export const deleteEmployee = async (req: Request, res: Response) => {
             .json({ Message: "INTERNAL_ERROR", Error: err });
 
         if (!Array.isArray(row) || row.length === 0) {
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
+          return res.status(404).json({ Message: "EMPLOYEE_NOT_FOUND" });
         }
-        if (row.length === 0)
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
 
         db.query(
           "DELETE FROM employees WHERE employees.id = ?",
@@ -45,7 +43,7 @@ export const deleteEmployee = async (req: Request, res: Response) => {
               return res
                 .status(500)
                 .json({ Message: "INTERNAL_ERROR", Error: err });
-            return res.status(200).json({ Message: "USER_DELETED" });
+            return res.status(200).json({ Message: "EMPLOYEE_DELETED" });
           }
         );
       }
@@ -70,10 +68,8 @@ export const detailEmployee = async (req: Request, res: Response) => {
             .json({ Message: "INTERNAL_ERROR", Error: err });
 
         if (!Array.isArray(result) || result.length === 0) {
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
+          return res.status(404).json({ Message: "EMPLOYEE_NOT_FOUND" });
         }
-        if (result.length === 0)
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
         return res.status(200).json(result[0]);
       }
     );
@@ -104,11 +100,8 @@ export const updateEmployee = async (req: Request, res: Response) => {
             .json({ Message: "INTERNAL_ERROR", Error: err });
 
         if (!Array.isArray(row) || row.length === 0) {
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
+          return res.status(404).json({ Message: "EMPLOYEE_NOT_FOUND" });
         }
-        if (row.length === 0)
-          return res.status(404).json({ Message: "USER_NOT_FOUND" });
-
         const fields = Object.keys(updates);
         const values = Object.values(updates);
         const setClause = fields.map((field) => `${field} = ?`).join(", ");
@@ -123,7 +116,7 @@ export const updateEmployee = async (req: Request, res: Response) => {
                 .json({ Message: "INTERNAL_ERROR", Error: err });
             return res
               .status(201)
-              .json({ Message: "USER_UPDATED", Content: result });
+              .json({ Message: "EMPLOYEE_UPDATED", Content: result });
           }
         );
       }
